@@ -11,18 +11,21 @@ Route::get('/', function () {
 Route::get('/jobs', function () {
     $jobs = Job::with('employer')->simplePaginate(3);
 
-    return view('jobs', [
+    return view('jobs.index', [
         'jobs' => $jobs
     ]);
+});
+
+Route::get('jobs/create', function () {
+    return view('jobs.create');
 });
 
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
 
-    // dd($job);
-
-    return view('job', ['job' => $job]);
+    return view('jobs.show', ['job' => $job]);
 });
+
 
 Route::get('/contact', function () {
     return view('contact');
